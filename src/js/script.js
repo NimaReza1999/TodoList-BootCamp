@@ -9,6 +9,10 @@ const radioButtons = document.querySelectorAll('.radio__button');
 
 const radioButtonsArray = [...radioButtons];
 
+// *Variables
+
+let todos = [];
+
 
 
 // *Functions
@@ -31,13 +35,24 @@ function closeModalFunction() {
 
 }
 
-function selectOneRadioButton(element) {
-    
-    // console.log (element.target.id)
-}
 
 function todoCreator() {
 
+    let label;
+    radioButtons.forEach((element) => {
+        if (element.checked === true) {
+            label = element.id
+        }
+    })
+    let todoItem = {
+        todoTitle:todoTitleInput.value,
+        todoLable:label,
+    }
+
+    todos.push(todoItem);
+    console.log(todos);
+    todoTitleInput.value = "";
+    radioButtons.forEach(element => element.checked =! true)
 }
 
 
@@ -46,6 +61,4 @@ function todoCreator() {
 openModal.addEventListener('click', openModalFunction);
 closeModal.addEventListener('click', closeModalFunction);
 confirmTodo.addEventListener('click', confirmTodoFunction);
-radioButtons.forEach((element) => {
-    element.addEventListener('click', selectOneRadioButton);
-})
+confirmTodo.addEventListener('click', todoCreator);
